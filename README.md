@@ -1,4 +1,4 @@
-#Final Sprint Full Stack Database
+# Final Sprint Full Stack Database
 
 to start the program you will need a .env file with:<br>
 PGUSER,
