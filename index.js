@@ -1,10 +1,7 @@
-if( process.env.NODE_ENV !== 'production') {
-    require('dotenv').config();
-}
-
 const express = require("express")
 const app = express();
 const session = require('express-session')
+require('dotenv').config();
 const PORT = process.env.PORT || 3000
 global.DEBUG = true
 
@@ -28,3 +25,7 @@ app.get('/',(req,res)=>{
 
 const loginRouter = require('./routes/login')
 app.use("/login",loginRouter)
+
+
+const searchRouter = require('./routes/search')
+app.use('/search',searchRouter)

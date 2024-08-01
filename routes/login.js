@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 
-const {addUser, getLoginByUsername} = require('../services/login.dal')
+const {addUser, getLoginByUsername} = require('../services/p.login.dal')
 
 
 router.get('/', async (req,res)=>{
@@ -23,7 +23,7 @@ router.post('/',async (req,res)=>{
             return
         }
         if(await bcrypt.compare(req.body.password, user.password)){
-            const token = jwt.sign({username: user.username}, process.env.JWT_SECRET,{expiresIn: '3m' });
+            const token = jwt.sign({username: user.username}, process.env.JWT_SECRET,{expiresIn: '1m' });
             req.session.user = user;
             req.session.token = token
             req.session.stat = `hello ${user.username}`
