@@ -1,0 +1,9 @@
+{
+    "_id": "000000001",
+    "name": "Lego Set",
+    "description": "New Lego set for all ages.",
+    "price": "19.99",
+    "category": "Puzzle",
+    "stock": "10"
+  }
+  
