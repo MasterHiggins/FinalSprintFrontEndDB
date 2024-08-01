@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>This search</h1>
+    <div>
+        <form action="/search" method="post">
+            <br>
+            <% if(results.length >0 ){ %>
+                <%   results.forEach(item => { %>
+                    <b><%= item.name %> <%= item.price %> </b>
+                    <%= item.description %> <br>
+                    <% });%>
+           <% } else{%>
+                <p>no search resluts found</p>
+           <% }%>
+            <label>Search</label><br>
+            <label>Keyword:
+                <input type="text" name="keyword" id="keyword" value="<%= locals.keyword %>" required>
+            </label>
+            <br>
+            <button>search</button>
+        </form>
+    </div>
+
+    <%- include('./partials/stat.ejs') %>
+    <br>
+    <%- include('./partials/nav.ejs') %>
+</body>
+</html>
