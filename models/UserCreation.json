@@ -1,0 +1,13 @@
+{
+    "_id": "AA00000001",
+    "name": "John Doe",
+    "email": "johndoe@test.com",
+    "password": "ABCD",
+    "address": {
+      "street": "Main Street",
+      "city": "Main City",
+      "province": "NL",
+      "zip": "A1A 1A1"
+    }
+  }
+  
