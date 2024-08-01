@@ -57,7 +57,7 @@ router.post('/new',async(req,res)=>{
         req.session.stat = `welcome ${req.body.username}`
             //error handling here
         }
-        console.log("new user made ??")
+        console.log("new user made")
         res.redirect('/login')
 
     } catch (error) {
