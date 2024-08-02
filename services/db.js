@@ -1,28 +1,33 @@
-const Pool = require('pg').Pool
+const { Pool } = require("pg");
+const mongoose = require("mongoose");
+require("dotenv").config(); // Ensure dotenv is required to load environment variables
+
+let db = {};
+
+console.log("Attempting to connect to PostgreSQL...");
+console.log("PGUSER:", process.env.PGUSER);
+console.log("PGHOST:", process.env.PGHOST);
+console.log("PGDATABASE:", process.env.PGDATABASE);
+console.log("PGPASSWORD:", process.env.PGPASSWORD);
+console.log("PGPORT:", process.env.PGPORT);
+
 const pool = new Pool({
-    user: process.env.PGUSER,
-    host: process.env.PGHOST,
-    database: process.env.PGDATABASE,
-    password: process.env.PGPASSWORD,
-    port: process.env.PGPORT
-})
-const { Pool } = require('pg');
-const mongoose = require('mongoose');
+  user: process.env.PGUSER,
+  host: process.env.PGHOST,
+  database: process.env.PGDATABASE,
+  password: process.env.PGPASSWORD,
+  port: process.env.PGPORT,
+});
 
-const useMongoDB = process.env.USE_MONGO_DB === 'true';
-
-let db;
-
-if (useMongoDB) {
-  mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('MongoDB connected...'))
-    .catch(err => console.log(err));
-  db = mongoose;
-} else {
-  db = new Pool({
-    connectionString: process.env.PG_URI,
+pool
+  .connect()
+  .then(() => {
+    console.log("PostgreSQL connected...");
+    db.pool = pool; // Assign the pool to the db object
+  })
+  .catch((err) => {
+    console.log("PostgreSQL connection error:", err);
+    db.pool = null; // Set db.pool to null if the connection fails
   });
-}
 
 module.exports = db;
-module.exports = pool;

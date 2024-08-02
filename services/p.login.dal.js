@@ -1,44 +1,33 @@
-const db = require('./db');
-const User = require('../models/user'); //Import the MongoDB user model
+const db = require("./db");
 
-const useMongoDB = process.env.USE_MONGO_DB === 'true';
+// Function to add a new user
+const addUser = async (username, email, password) => {
+  const result = await db.pool.query(
+    "INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *",
+    [username, email, password]
+  );
+  return result.rows[0];
+};
 
-async function getLogin() {
-  if (DEBUG) console.log("in get login");
-  if (useMongoDB) {
-    return User.find().exec();
-  } else {
-    let sql = 'select * from public.users';
-    let res = await db.query(sql, []);
-    return res.rows;
-  }
-}
+// Function to get user by username
+const getLoginByUsername = async (username) => {
+  const result = await db.pool.query(
+    "SELECT * FROM users WHERE username = $1",
+    [username]
+  );
+  return result.rows[0];
+};
 
-async function getLoginByUsername(username) {
-  if (DEBUG) console.log("in get login by username");
-  if (useMongoDB) {
-    return User.findOne({ username }).exec();
-  } else {
-    let sql = `select * from public.users where username = $1`;
-    let results = await db.query(sql, [username]);
-    return results.rows[0];
-  }
-}
-
-async function addUser(username, email, password) {
-  if (DEBUG) console.log("in add user");
-  if (useMongoDB) {
-    const newUser = new User({ username, email, password });
-    return newUser.save();
-  } else {
-    let sql = 'insert into public.users(username, email, password) values ($1, $2, $3) returning user_id';
-    let res = await db.query(sql, [username, email, password]);
-    return res.rows[0].user_id;
-  }
-}
+// Function to get user by email
+const getUserByEmail = async (email) => {
+  const result = await db.pool.query("SELECT * FROM users WHERE email = $1", [
+    email,
+  ]);
+  return result.rows[0];
+};
 
 module.exports = {
-  getLogin,
-  getLoginByUsername,
   addUser,
+  getLoginByUsername,
+  getUserByEmail,
 };
