@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>FSDB Final Sprint</title>
+  </head>
+  <body>
     <h1>Welcome to FSDB final sprint</h1>
-    <%- include('./partials/stat.ejs') %>
-    <%- include('./partials/nav.ejs') %>
-</body>
+    <% if (stat) { %>
+    <div><%= stat %></div>
+    <% } %> <%- include('./partials/nav.ejs') %>
+  </body>
 </html>

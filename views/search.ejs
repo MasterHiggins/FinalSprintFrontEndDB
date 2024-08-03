@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>This search</h1>
-    <div>
-        <form action="/search" method="post">
-            <br>
-            <% if(results.length >0 ){ %>
-                <%   results.forEach(item => { %>
-                    <b><%= item.name %> <%= item.price %> </b>
-                    <%= item.description %> <br>
-                    <% });%>
-           <% } else{%>
-                <p>no search resluts found</p>
-           <% }%>
-            <label>Search</label><br>
-            <label>Keyword:
-                <input type="text" name="keyword" id="keyword" value="<%= locals.keyword %>" required>
-            </label>
-            <br>
-            <button>search</button>
-        </form>
-    </div>
-
-    <%- include('./partials/stat.ejs') %>
-    <br>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Search Engine</title>
+  </head>
+  <body>
     <%- include('./partials/nav.ejs') %>
-</body>
+
+    <h1>Search Engine!</h1>
+
+    <form action="/search/results" method="POST">
+      <label for="query">Search:</label>
+      <input type="text" id="query" name="query" required />
+      <label for="database">Database:</label>
+      <select id="database" name="database" required>
+        <option value="Postgres">Postgres</option>
+        <option value="MongoDB">MongoDB</option>
+        <option value="Both">Both</option>
+      </select>
+      <button type="submit">Search!</button>
+    </form>
+
+    <% if (results && results.length > 0) { %>
+    <h2>Search Results for "<%= query %>"</h2>
+    <ul>
+      <% results.forEach(result => { %>
+      <li>
+        <%= result.name %> - <%= result.description %> - $<%= result.price %>
+      </li>
+      <% }) %>
+    </ul>
+    <% } %>
+  </body>
 </html>
