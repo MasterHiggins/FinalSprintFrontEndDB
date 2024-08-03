@@ -8,6 +8,7 @@ const productSchema = new Schema({
   category: String,
   stock: { type: Number, required: true },
   on_sale: { type: Boolean, default: false },
+  hit_count: { type: Number, default: 0 },
 });
 
 const Product = mongoose.model("Product", productSchema);

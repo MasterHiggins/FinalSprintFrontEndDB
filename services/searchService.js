@@ -36,9 +36,19 @@ exports.searchMongo = async (query) => {
     $or: [{ name: regex }, { description: regex }],
   });
 
+  // Log the results and update process
+  console.log("MongoDB search results:", results);
+
   // Increment hit count for each product found in MongoDB
   for (let result of results) {
-    await Product.updateOne({ _id: result._id }, { $inc: { hit_count: 1 } });
+    const updateResult = await Product.updateOne(
+      { _id: result._id },
+      { $inc: { hit_count: 1 } }
+    );
+    console.log(
+      `Updated product ${result._id} with hit count increment`,
+      updateResult
+    );
   }
 
   return results;
