@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<body>
-    <h1>This is Login</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+  </head>
+  <body>
+    <h1>Login</h1>
+    <% if (stat) { %>
+    <p><%= stat %></p>
+    <% } %>
     <form action="/login" method="post">
-        <label for="username"></label>
-        <input type="text" name="username" placeholder="username" id="username" required><br>
-        <label for="password"></label>
-        <input type="password" name="password" placeholder="password" id="password" required><br>
-        <input type="submit" value="login">
+      <label for="username">Username:</label>
+      <input type="text" name="username" id="username" required />
+      <br />
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" required />
+      <br />
+      <button type="submit">Login</button>
     </form>
-    <%- include('./partials/stat.ejs') %>
-    <br>
-    <%- include('./partials/nav.ejs') %>
-</body>
+    <hr />
+    <a href="/auth/google">Login with Google</a>
+  </body>
 </html>
-

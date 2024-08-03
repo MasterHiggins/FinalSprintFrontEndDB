@@ -5,9 +5,8 @@ const winston = require("winston");
 const path = require("path");
 const fs = require("fs");
 const EventEmitter = require("events");
-const passport = require("./services/passport"); // Import passport configuration
-const db = require("./services/db"); // Ensure database initialization
-const protectedRouter = require("./routes/protected");
+const passport = require("./services/passport");
+const db = require("./services/db");
 const app = express();
 const PORT = process.env.PORT || 3000;
 global.DEBUG = true;
@@ -28,6 +27,10 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    },
   })
 );
 
@@ -35,7 +38,28 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-//protected router
+// Middleware to make user available in all views
+app.use((req, res, next) => {
+  res.locals.user = req.user || null;
+  next();
+});
+
+// Middleware to log session and user information
+app.use((req, res, next) => {
+  console.log("Debugging middleware:");
+  console.log("Session:", req.session);
+  console.log("Cookies:", req.cookies);
+  console.log("User:", req.user);
+  next();
+});
+
+// Auth routes
+console.log("Registering auth routes...");
+const authRouter = require("./routes/auth");
+app.use("/auth", authRouter);
+console.log("Auth routes registered.");
+
+const protectedRouter = require("./routes/protected");
 app.use("/api", protectedRouter);
 
 // Create logs directory if it doesn't exist
@@ -93,11 +117,13 @@ const productRoutes = require("./routes/productRoutes");
 app.use("/api", userRoutes);
 app.use("/api", productRoutes);
 
-const authRouter = require("./routes/auth");
-app.use("/auth", authRouter);
-
 const testPostgresRouter = require("./routes/testPostgres");
 app.use("/test", testPostgresRouter);
+
+app.use((err, req, res, next) => {
+  console.error("Unhandled error:", err);
+  res.status(500).send("Something went wrong!");
+});
 
 // Start server
 app.listen(PORT, (err) => {

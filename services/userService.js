@@ -1,5 +1,26 @@
 const db = require("./db");
 
+const createUser = async (
+  username,
+  email,
+  password = null,
+  oauth_provider = null,
+  oauth_id = null
+) => {
+  const result = await db.pool.query(
+    "INSERT INTO users (username, email, password, oauth_provider, oauth_id) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+    [username, email, password, oauth_provider, oauth_id]
+  );
+  return result.rows[0];
+};
+
+const getUserById = async (user_id) => {
+  const result = await db.pool.query("SELECT * FROM users WHERE user_id = $1", [
+    user_id,
+  ]);
+  return result.rows[0];
+};
+
 const getUserByEmail = async (email) => {
   const result = await db.pool.query("SELECT * FROM users WHERE email = $1", [
     email,
@@ -7,21 +28,8 @@ const getUserByEmail = async (email) => {
   return result.rows[0];
 };
 
-const getUserById = async (id) => {
-  const result = await db.pool.query("SELECT * FROM users WHERE id = $1", [id]);
-  return result.rows[0];
-};
-
-const createUser = async (username, email, providerId) => {
-  const result = await db.pool.query(
-    "INSERT INTO users (username, email, provider_id) VALUES ($1, $2, $3) RETURNING *",
-    [username, email, providerId]
-  );
-  return result.rows[0];
-};
-
 module.exports = {
-  getUserByEmail,
-  getUserById,
   createUser,
+  getUserById,
+  getUserByEmail,
 };

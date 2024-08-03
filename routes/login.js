@@ -2,7 +2,6 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
-
 const { addUser, getLoginByUsername } = require("../services/p.login.dal");
 
 router.get("/", async (req, res) => {
@@ -18,6 +17,9 @@ router.post("/", async (req, res) => {
     if (!user) {
       req.session.stat = "wrong username";
       console.log("wrong username");
+      if (req.headers["content-type"] === "application/json") {
+        return res.status(401).json({ error: "Wrong username" });
+      }
       res.redirect("/login");
       return;
     }
@@ -30,16 +32,25 @@ router.post("/", async (req, res) => {
       req.session.user = user;
       req.session.token = token;
       req.session.stat = `hello ${user.username}`;
+      if (req.headers["content-type"] === "application/json") {
+        return res.json({ message: `hello ${user.username}`, token });
+      }
       res.redirect("/");
       return;
     } else {
       req.session.stat = "wrong password";
       console.log("wrong password");
+      if (req.headers["content-type"] === "application/json") {
+        return res.status(401).json({ error: "Wrong password" });
+      }
       res.redirect("/login");
       return;
     }
   } catch (error) {
     console.log(error);
+    if (req.headers["content-type"] === "application/json") {
+      return res.status(500).json({ error: "Internal server error" });
+    }
     res.redirect("/");
     return;
   }

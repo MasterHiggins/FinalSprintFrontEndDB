@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const passport = require("./passport"); // Adjust the path according to your project structure
+const passport = require("./passport");
 
 // JWT Middleware
 const authJWT = (req, res, next) => {

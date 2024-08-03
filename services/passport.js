@@ -1,6 +1,6 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const userService = require("./userService"); // Use the new userService
+const userService = require("./userService");
 
 passport.use(
   new GoogleStrategy(
@@ -20,7 +20,13 @@ passport.use(
 
         if (!user) {
           // If user does not exist, create a new user in PostgreSQL
-          user = await userService.createUser(username, email, providerId);
+          user = await userService.createUser(
+            username,
+            email,
+            null,
+            "google",
+            providerId
+          );
         }
 
         return done(null, user);
@@ -38,6 +44,9 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (user_id, done) => {
   try {
     const user = await userService.getUserById(user_id);
+    if (!user) {
+      return done(null, false); // User not found
+    }
     done(null, user);
   } catch (err) {
     done(err, null);
