@@ -15,16 +15,19 @@ exports.performSearch = async (req, res) => {
   const useBoth = req.body.database === "Both";
 
   let results = [];
+  let dataSource = "";
   try {
     if (usePostgres || useBoth) {
       const postgresResults = await searchPostgres(query, req.user);
       results = results.concat(postgresResults);
+      dataSource = useBoth ? "Both" : "Postgres";
     }
     if (useMongo || useBoth) {
       const mongoResults = await searchMongo(query, req.user);
       results = results.concat(mongoResults);
+      dataSource = useBoth ? "Both" : "MongoDB";
     }
-    await logSearch(req.user, query);
+    await logSearch(req.user, query, dataSource); // Log search with data source
     res.render("search", { stat: req.session.stat, results, query });
   } catch (error) {
     console.error("Error performing search:", error);
