@@ -40,7 +40,7 @@ app.use(passport.session());
 
 // Middleware to make user available in all views
 app.use((req, res, next) => {
-  res.locals.user = req.user || null;
+  res.locals.user = req.session.user || req.user;
   next();
 });
 
