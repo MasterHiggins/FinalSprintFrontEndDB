@@ -42,17 +42,16 @@
           </form>
         </div>
         <div class="search-results">
+          <% if (typeof searchPerformed !== 'undefined' && searchPerformed) { %>
           <% if (results && results.length > 0) { %>
           <div class="results-grid">
             <% results.forEach(result => { %>
             <div class="result-card">
               <div class="result-header">
                 <h3>
-                  <%= result.name %> <% if (result.on_sale) { %><img
-                    src="/assets/sale.png"
-                    alt="Sale"
-                    class="sale-icon"
-                  /><% } %>
+                  <%= result.name %> <% if (result.on_sale) { %>
+                  <img src="/assets/sale.png" alt="Sale" class="sale-icon" />
+                  <% } %>
                 </h3>
               </div>
               <div class="result-body">
@@ -69,7 +68,7 @@
           </div>
           <% } else { %>
           <p>No results found.</p>
-          <% } %>
+          <% } %> <% } %>
         </div>
       </div>
     </div>

@@ -5,7 +5,11 @@ const {
 } = require("../services/searchService");
 
 exports.renderSearchPage = (req, res) => {
-  res.render("search", { stat: req.session.stat, results: [] });
+  res.render("search", {
+    stat: req.session.stat,
+    results: [],
+    searchPerformed: false,
+  });
 };
 
 exports.performSearch = async (req, res) => {
@@ -13,6 +17,15 @@ exports.performSearch = async (req, res) => {
   const usePostgres = req.body.database === "Postgres";
   const useMongo = req.body.database === "MongoDB";
   const useBoth = req.body.database === "Both";
+
+  // If no query is provided, render the search page without performing a search
+  if (!query) {
+    return res.render("search", {
+      stat: req.session.stat,
+      results: [],
+      searchPerformed: false,
+    });
+  }
 
   let results = [];
   let dataSource = "";
@@ -28,7 +41,12 @@ exports.performSearch = async (req, res) => {
       dataSource = useBoth ? "Both" : "MongoDB";
     }
     await logSearch(req.user, query, dataSource); // Log search with data source
-    res.render("search", { stat: req.session.stat, results, query });
+    res.render("search", {
+      stat: req.session.stat,
+      results,
+      query,
+      searchPerformed: true,
+    });
   } catch (error) {
     console.error("Error performing search:", error);
     res.status(500).send("Error performing search");
