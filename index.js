@@ -53,10 +53,8 @@ app.use((req, res, next) => {
 });
 
 // Auth routes
-console.log("Registering auth routes...");
 const authRouter = require("./routes/auth");
 app.use("/auth", authRouter);
-console.log("Auth routes registered.");
 
 const protectedRouter = require("./routes/protected");
 app.use("/api", protectedRouter);
@@ -118,6 +116,9 @@ app.use("/api", productRoutes);
 
 const testPostgresRouter = require("./routes/testPostgres");
 app.use("/test", testPostgresRouter);
+
+const logoutRouter = require("./routes/logout");
+app.use("/logout", logoutRouter);
 
 app.use((err, req, res, next) => {
   console.error("Unhandled error:", err);

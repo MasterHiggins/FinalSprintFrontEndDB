@@ -1,31 +1,29 @@
-body {
-  font-family: "Inter", sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 20px 60px;
+  padding: 20px 40px;
   background-color: #c5e8f0;
-  position: sticky; /* Make header sticky */
-  top: 0; /* Stick to the top */
-  z-index: 1000; /* Ensure it stays on top of other elements */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-link {
   display: flex;
   align-items: center;
   text-decoration: none;
 }
 
 .logo {
-  height: 100px;
+  height: 100px; /* Adjust size as needed */
   margin-right: 10px;
-  margin-top: 6px;
 }
 
 .shop-tart-text {
@@ -35,32 +33,22 @@ body {
   color: #11a4c4;
 }
 
+.header-button-form {
+  display: inline;
+}
+
 .header-button {
   font-family: "Inter", sans-serif;
   font-weight: 600;
-  color: #3cb3cd;
-  background: none;
+  color: #fff;
+  background-color: #3cb3cd;
   border: none;
   cursor: pointer;
-  padding: 15px 30px;
+  padding: 10px 20px;
   border-radius: 5px;
-  background-color: #3cb3cd;
-  color: #fff;
   transition: background-color 0.3s ease;
 }
 
 .header-button:hover {
   background-color: #34a1b1;
-}
-
-@media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .header-button {
-    align-self: center;
-    margin-top: 10px;
-  }
 }
