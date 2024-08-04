@@ -22,8 +22,8 @@
 }
 
 .logo {
-  height: 100px; /* Adjust size as needed */
-  margin-right: 10px;
+  height: 120px; /* Adjust size as needed */
+  margin-right: -25px;
 }
 
 .shop-tart-text {
@@ -31,6 +31,7 @@
   font-weight: bold;
   font-size: 36px;
   color: #11a4c4;
+  margin-bottom: 16px;
 }
 
 .header-button-form {
@@ -48,6 +49,7 @@
   border-radius: 5px;
   transition: background-color 0.3s ease;
   text-decoration: none;
+  margin-right: 100px;
 }
 
 .header-button:hover {

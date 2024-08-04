@@ -103,6 +103,7 @@ body {
 
 .result-card {
   background-color: rgba(255, 255, 255, 0.9);
+  color: #095d70;
   border-radius: 10px;
   padding: 20px;
   margin: 10px;
