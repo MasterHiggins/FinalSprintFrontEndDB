@@ -52,9 +52,33 @@ app.use((req, res, next) => {
   next();
 });
 
+// Middleware to check authentication
+const checkAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return res.redirect("/search");
+  }
+  next();
+};
+
+const checkNotAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/login");
+};
+
 // Auth routes
 const authRouter = require("./routes/auth");
 app.use("/auth", authRouter);
+
+const registerRouter = require("./routes/register");
+app.use("/register", registerRouter);
+app.use((req, res, next) => {
+  if (req.path === "/register") {
+    console.log("Register route accessed");
+  }
+  next();
+});
 
 const protectedRouter = require("./routes/protected");
 app.use("/api", protectedRouter);
@@ -98,16 +122,16 @@ myEmitter.on("log", (message) => {
 });
 
 // Routes
-app.get("/", (req, res) => {
+app.get("/", checkAuthenticated, (req, res) => {
   myEmitter.emit("log", "Visited homepage");
   res.render("index", { stat: req.session.stat });
 });
 
 const loginRouter = require("./routes/login");
-app.use("/login", loginRouter);
+app.use("/login", checkAuthenticated, loginRouter);
 
 const searchRouter = require("./routes/search");
-app.use("/search", searchRouter);
+app.use("/search", checkNotAuthenticated, searchRouter);
 
 const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
