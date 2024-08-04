@@ -1,0 +1,22 @@
+<header class="header">
+  <div class="logo-container">
+    <a href="/" class="logo-link">
+      <img src="/assets/shoptartlogo.png" alt="ShopTart Logo" class="logo" />
+      <span class="shop-tart-text">ShopTart</span>
+    </a>
+  </div>
+  <nav>
+    <% if (user) { %>
+    <form
+      id="logout-form"
+      action="/auth/logout"
+      method="POST"
+      class="header-button-form"
+    >
+      <button type="submit" class="header-button">Logout</button>
+    </form>
+    <% } else { %>
+    <a href="/login" class="header-button">Login</a>
+    <% } %>
+  </nav>
+</header>

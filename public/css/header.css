@@ -1,0 +1,57 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px 40px;
+  background-color: #c5e8f0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo {
+  height: 120px; /* Adjust size as needed */
+  margin-right: -25px;
+}
+
+.shop-tart-text {
+  font-family: "Livvic", sans-serif;
+  font-weight: bold;
+  font-size: 36px;
+  color: #11a4c4;
+  margin-bottom: 16px;
+}
+
+.header-button-form {
+  display: inline;
+}
+
+.header-button {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  color: #fff;
+  background-color: #3cb3cd;
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  margin-right: 100px;
+}
+
+.header-button:hover {
+  background-color: #34a1b1;
+}

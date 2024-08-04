@@ -9,7 +9,7 @@ const {
 router.get("/google", googleAuth);
 router.get("/google/callback", googleAuthCallback, googleAuthHandler);
 
-router.get("/logout", (req, res) => {
+router.post("/logout", (req, res) => {
   console.log("Logout route called");
 
   // Manually clear the user from the session
@@ -27,8 +27,8 @@ router.get("/logout", (req, res) => {
 
     console.log("Session destroyed and cookie cleared");
 
-    // Redirect to home page
-    res.redirect("/");
+    // Redirect to the login page
+    res.redirect("/login");
   });
 });
 

@@ -3,9 +3,14 @@ const {
   searchMongo,
   logSearch,
 } = require("../services/searchService");
+const myEmitter = require("../services/logEvents"); // Import the event emitter
 
 exports.renderSearchPage = (req, res) => {
-  res.render("search", { stat: req.session.stat, results: [] });
+  res.render("search", {
+    stat: req.session.stat,
+    results: [],
+    searchPerformed: false,
+  });
 };
 
 exports.performSearch = async (req, res) => {
@@ -13,6 +18,14 @@ exports.performSearch = async (req, res) => {
   const usePostgres = req.body.database === "Postgres";
   const useMongo = req.body.database === "MongoDB";
   const useBoth = req.body.database === "Both";
+
+  if (!query) {
+    return res.render("search", {
+      stat: req.session.stat,
+      results: [],
+      searchPerformed: false,
+    });
+  }
 
   let results = [];
   let dataSource = "";
@@ -27,10 +40,20 @@ exports.performSearch = async (req, res) => {
       results = results.concat(mongoResults);
       dataSource = useBoth ? "Both" : "MongoDB";
     }
-    await logSearch(req.user, query, dataSource); // Log search with data source
-    res.render("search", { stat: req.session.stat, results, query });
+    await logSearch(req.user, query, dataSource);
+    myEmitter.emit(
+      "log",
+      "search",
+      `Search performed by ${req.user.username} using ${dataSource}`
+    );
+    res.render("search", {
+      stat: req.session.stat,
+      results,
+      query,
+      searchPerformed: true,
+    });
   } catch (error) {
-    console.error("Error performing search:", error);
+    myEmitter.emit("error", "search", `Search error: ${error.message}`);
     res.status(500).send("Error performing search");
   }
 };

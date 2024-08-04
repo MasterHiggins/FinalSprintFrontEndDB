@@ -1,0 +1,408 @@
+[{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e2b"
+  },
+  "name": "Fashionista Smartphone",
+  "description": "Latest model smartphone with high-end specs",
+  "price": "349.99",
+  "category": "Electronics",
+  "stock": 18,
+  "on_sale": false,
+  "hit_count": 25
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e2c"
+  },
+  "name": "TechMaster Laptop",
+  "description": "Lightweight laptop with long battery life",
+  "price": "1299.00",
+  "category": "Electronics",
+  "stock": 14,
+  "on_sale": false,
+  "hit_count": 29
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e2d"
+  },
+  "name": "KitchenPro Smartwatch",
+  "description": "Smartwatch with fitness tracking features",
+  "price": "239.99",
+  "category": "Electronics",
+  "stock": 95,
+  "on_sale": false,
+  "hit_count": 25
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e2e"
+  },
+  "name": "SoundPro Bluetooth",
+  "description": "Portable speaker with excellent sound quality",
+  "price": "99.99",
+  "category": "Electronics",
+  "stock": 94,
+  "on_sale": true,
+  "hit_count": 30
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e2f"
+  },
+  "name": "SoundPro Wireless",
+  "description": "Noise-cancelling wireless earbuds",
+  "price": "49.99",
+  "category": "Electronics",
+  "stock": 28,
+  "on_sale": false,
+  "hit_count": 30
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e30"
+  },
+  "name": "The Enigma of Shadows",
+  "description": "A thrilling mystery novel with unexpected twists",
+  "price": "17.99",
+  "category": "Books",
+  "stock": 13,
+  "on_sale": false,
+  "hit_count": 24
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e31"
+  },
+  "name": "Quantum Realms",
+  "description": "A futuristic science fiction book",
+  "price": "24.99",
+  "category": "Books",
+  "stock": 64,
+  "on_sale": false,
+  "hit_count": 24
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e32"
+  },
+  "name": "The Life of Legends",
+  "description": "Inspiring biography of a famous person",
+  "price": "25.99",
+  "category": "Books",
+  "stock": 99,
+  "on_sale": true,
+  "hit_count": 29
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e33"
+  },
+  "name": "SmartX The Tales of Old Boolks",
+  "description": "An epic tale set in a magical world",
+  "price": "$15.99",
+  "category": "Books",
+  "stock": 56,
+  "on_sale": false,
+  "hit_count": 25
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e34"
+  },
+  "name": "Gourmet Delights",
+  "description": "Recipe book with delicious recipes",
+  "price": "24.88",
+  "category": "Books",
+  "stock": 32,
+  "on_sale": false,
+  "hit_count": 0
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e35"
+  },
+  "name": "GigaWare T-shirt",
+  "description": "Comfortable cotton t-shirt",
+  "price": "19.99",
+  "category": "Clothing",
+  "stock": 40,
+  "on_sale": false,
+  "hit_count": 24
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e36"
+  },
+  "name": "KitchenPro Jeans",
+  "description": "Stylish and durable jeans",
+  "price": "149.99",
+  "category": "Clothing",
+  "stock": 60,
+  "on_sale": true,
+  "hit_count": 24
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e37"
+  },
+  "name": "Fashionista Jacket",
+  "description": "Warm and cozy jacket for winter",
+  "price": "499.99",
+  "category": "Clothing",
+  "stock": 59,
+  "on_sale": false,
+  "hit_count": 24
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e38"
+  },
+  "name": "SoundPro Sneakers",
+  "description": "Fashionable sneakers for everyday wear",
+  "price": "149.99",
+  "category": "Clothing",
+  "stock": 73,
+  "on_sale": false,
+  "hit_count": 30
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e39"
+  },
+  "name": "Fashionista Dress",
+  "description": "Elegant dress for special occasions",
+  "price": "299.99",
+  "category": "Clothing",
+  "stock": 42,
+  "on_sale": false,
+  "hit_count": 24
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e3a"
+  },
+  "name": "Fashionista Blender",
+  "description": "High-speed blender for smoothies",
+  "price": "349.99",
+  "category": "Home & Kitchen",
+  "stock": 75,
+  "on_sale": false,
+  "hit_count": 24
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e3b"
+  },
+  "name": "BrewMaster Coffee",
+  "description": "Automatic coffee maker with timer",
+  "price": "88.88",
+  "category": "Home & Kitchen",
+  "stock": 49,
+  "on_sale": true,
+  "hit_count": 24
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e3c"
+  },
+  "name": "ComfyWear Vacuum",
+  "description": "Powerful vacuum cleaner for all surfaces",
+  "price": "139.99",
+  "category": "Home & Kitchen",
+  "stock": 24,
+  "on_sale": false,
+  "hit_count": 25
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e3d"
+  },
+  "name": "GigaWare Microwave",
+  "description": "Compact microwave oven with multiple settings",
+  "price": "129.99",
+  "category": "Home & Kitchen",
+  "stock": 4,
+  "on_sale": false,
+  "hit_count": 24
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e3e"
+  },
+  "name": "CleanHouse Air",
+  "description": "Air purifier for clean indoor air",
+  "price": "39.99",
+  "category": "Home & Kitchen",
+  "stock": 54,
+  "on_sale": false,
+  "hit_count": 24
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e3f"
+  },
+  "name": "CleanHouse Tennis",
+  "description": "Lightweight tennis racket with good grip",
+  "price": "62.00",
+  "category": "Sports & Outdoors",
+  "stock": 63,
+  "on_sale": false,
+  "hit_count": 24
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e40"
+  },
+  "name": "AirWave Yoga",
+  "description": "Non-slip yoga mat for all types of exercises",
+  "price": "88.99",
+  "category": "Sports & Outdoors",
+  "stock": 94,
+  "on_sale": false,
+  "hit_count": 24
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e41"
+  },
+  "name": "AirWave Hiking",
+  "description": "Durable and comfortable hiking boots",
+  "price": "239.99",
+  "category": "Sports & Outdoors",
+  "stock": 67,
+  "on_sale": false,
+  "hit_count": 24
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e42"
+  },
+  "name": "SoundPro Bicycle",
+  "description": "Mountain bike with multiple gears",
+  "price": "749.99",
+  "category": "Sports & Outdoors",
+  "stock": 69,
+  "on_sale": true,
+  "hit_count": 30
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e43"
+  },
+  "name": "ComfyWear Tent",
+  "description": "Waterproof tent for camping",
+  "price": "349.99",
+  "category": "Sports & Outdoors",
+  "stock": 48,
+  "on_sale": false,
+  "hit_count": 32
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e44"
+  },
+  "name": "ComfyWear Shampoo",
+  "description": "Nourishing shampoo for all hair types",
+  "price": "9.99",
+  "category": "Beauty & Personal Care",
+  "stock": 19,
+  "on_sale": true,
+  "hit_count": 25
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e45"
+  },
+  "name": "ComfyWear Facial",
+  "description": "Gentle facial cleanser for daily use",
+  "price": "24.99",
+  "category": "Beauty & Personal Care",
+  "stock": 13,
+  "on_sale": false,
+  "hit_count": 25
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e46"
+  },
+  "name": "SoundPro Moisturizer",
+  "description": "Hydrating moisturizer for smooth skin",
+  "price": "7.99",
+  "category": "Beauty & Personal Care",
+  "stock": 16,
+  "on_sale": false,
+  "hit_count": 30
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e47"
+  },
+  "name": "StyleHub Perfume",
+  "description": "Long-lasting perfume with a pleasant fragrance",
+  "price": "49.99",
+  "category": "Beauty & Personal Care",
+  "stock": 43,
+  "on_sale": false,
+  "hit_count": 24
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e48"
+  },
+  "name": "CleanHouse Lipstick",
+  "description": "Matte finish lipstick in various shades",
+  "price": "49.99",
+  "category": "Beauty & Personal Care",
+  "stock": 5,
+  "on_sale": true,
+  "hit_count": 24
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e49"
+  },
+  "name": "Fashionista Smartphone",
+  "description": "Latest model smartphone with high-end specs",
+  "price": "749.00",
+  "category": "Electronics",
+  "stock": 2,
+  "on_sale": false,
+  "hit_count": 25
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e4a"
+  },
+  "name": "StyleHub Laptop",
+  "description": "Lightweight laptop with long battery life",
+  "price": "1299.00",
+  "category": "Electronics",
+  "stock": 65,
+  "on_sale": true,
+  "hit_count": 29
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e4b"
+  },
+  "name": "BrewMaster Smartwatch",
+  "description": "Smartwatch with fitness tracking features",
+  "price": "349.99",
+  "category": "Electronics",
+  "stock": 89,
+  "on_sale": false,
+  "hit_count": 25
+},
+{
+  "_id": {
+    "$oid": "66ad23b61b77207f77cd5e4c"
+  },
+  "name": "GigaWare Bluetooth",
+  "description": "Portable speaker with excellent sound quality",
+  "price": "99.99",
+  "category": "Electronics",
+  "stock": 22,
+  "on_sale": true,
+  "hit_count": 24
+}]

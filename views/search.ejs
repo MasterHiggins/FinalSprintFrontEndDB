@@ -2,34 +2,75 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Search Engine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/search.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Jua&family=Livvic:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Search - ShopTart</title>
   </head>
   <body>
-    <%- include('./partials/nav.ejs') %>
-
-    <h1>Search Engine!</h1>
-
-    <form action="/search/results" method="POST">
-      <label for="query">Search:</label>
-      <input type="text" id="query" name="query" required />
-      <label for="database">Database:</label>
-      <select id="database" name="database" required>
-        <option value="Postgres">Postgres</option>
-        <option value="MongoDB">MongoDB</option>
-        <option value="Both">Both</option>
-      </select>
-      <button type="submit">Search!</button>
-    </form>
-
-    <% if (results && results.length > 0) { %>
-    <h2>Search Results for "<%= query %>"</h2>
-    <ul>
-      <% results.forEach(result => { %>
-      <li>
-        <%= result.name %> - <%= result.description %> - $<%= result.price %>
-      </li>
-      <% }) %>
-    </ul>
-    <% } %>
+    <%- include('partials/header', { buttonLabel: 'Logout' }) %>
+    <div class="background">
+      <img
+        src="/assets/rainbow.jpg"
+        alt="Rainbow Background"
+        class="background-image"
+      />
+      <div class="main-content">
+        <div class="welcome-message">
+          <h2>Welcome, <%= user.username %>!</h2>
+        </div>
+        <div class="search-container">
+          <form action="/search/results" method="POST">
+            <input
+              type="text"
+              name="query"
+              placeholder="Search products..."
+              class="search-bar"
+              required
+            />
+            <select name="database" class="search-dropdown">
+              <option value="">Select Database</option>
+              <option value="Postgres">Postgres</option>
+              <option value="MongoDB">MongoDB</option>
+              <option value="Both">Both</option>
+            </select>
+            <button type="submit" class="search-button">Search</button>
+          </form>
+        </div>
+        <div class="search-results">
+          <% if (typeof searchPerformed !== 'undefined' && searchPerformed) { %>
+          <% if (results && results.length > 0) { %>
+          <div class="results-grid">
+            <% results.forEach(result => { %>
+            <div class="result-card">
+              <div class="result-header">
+                <h3>
+                  <%= result.name %> <% if (result.on_sale) { %>
+                  <img src="/assets/sale.png" alt="Sale" class="sale-icon" />
+                  <% } %>
+                </h3>
+              </div>
+              <div class="result-body">
+                <p><%= result.description %></p>
+                <p
+                  class="badge <%= result.category.toLowerCase().replace(/&/g, 'and').replace(/\s+/g, '-') %>"
+                >
+                  <%= result.category %>
+                </p>
+                <p class="price">$<%= result.price %></p>
+              </div>
+            </div>
+            <% }) %>
+          </div>
+          <% } else { %>
+          <p>No results found.</p>
+          <% } %> <% } %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

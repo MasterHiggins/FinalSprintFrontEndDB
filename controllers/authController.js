@@ -1,6 +1,7 @@
 const db = require("../services/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const myEmitter = require("../services/logEvents");
 
 // Register a new user
 const register = async (req, res) => {
@@ -18,9 +19,13 @@ const register = async (req, res) => {
       { expiresIn: "1h" }
     );
     req.session.token = token;
-    res.status(201).json(user);
+    req.session.user = user;
+    myEmitter.emit("log", "register", `User registered: ${username}`);
+    res.redirect("/login");
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    myEmitter.emit("error", "register", `Registration error: ${err.message}`);
+    req.session.stat = err.message;
+    res.redirect("/register");
   }
 };
 
@@ -33,11 +38,13 @@ const login = async (req, res) => {
     ]);
     const user = result.rows[0];
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      req.session.stat = "User not found";
+      return res.redirect("/login");
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ error: "Invalid credentials" });
+      req.session.stat = "Invalid credentials";
+      return res.redirect("/login");
     }
     const token = jwt.sign(
       { id: user.user_id, username: user.username },
@@ -45,9 +52,13 @@ const login = async (req, res) => {
       { expiresIn: "1h" }
     );
     req.session.token = token;
-    res.status(200).json(user);
+    req.session.user = user;
+    myEmitter.emit("log", "login", `User logged in: ${user.username}`);
+    res.redirect("/search");
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    myEmitter.emit("error", "login", `Login error: ${err.message}`);
+    req.session.stat = err.message;
+    res.redirect("/login");
   }
 };
 

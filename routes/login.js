@@ -2,16 +2,17 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
-
 const { addUser, getLoginByUsername } = require("../services/p.login.dal");
 
 router.get("/", async (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.redirect("/search");
+  }
   if (DEBUG) console.log("in login.js");
   res.render("login", { stat: req.session.stat });
-  return;
 });
 
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   try {
     if (DEBUG) console.log("in post /");
     let user = await getLoginByUsername(req.body.username);
@@ -27,11 +28,15 @@ router.post("/", async (req, res) => {
         process.env.JWT_SECRET,
         { expiresIn: "1h" }
       );
-      req.session.user = user;
-      req.session.token = token;
-      req.session.stat = `hello ${user.username}`;
-      res.redirect("/");
-      return;
+      req.login(user, (err) => {
+        if (err) {
+          return next(err);
+        }
+        req.session.user = user;
+        req.session.token = token;
+        req.session.stat = `hello ${user.username}`;
+        return res.redirect("/search");
+      });
     } else {
       req.session.stat = "wrong password";
       console.log("wrong password");
@@ -40,15 +45,17 @@ router.post("/", async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.redirect("/");
+    res.redirect("/login");
     return;
   }
 });
 
 router.get("/new", async (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.redirect("/search");
+  }
   if (DEBUG) console.log("in login.js");
   res.render("register", { stat: req.session.stat });
-  return;
 });
 
 router.post("/new", async (req, res) => {
@@ -58,11 +65,17 @@ router.post("/new", async (req, res) => {
       if (DEBUG) console.log("in /new");
       await addUser(req.body.username, req.body.email, hashPass);
       req.session.stat = `welcome ${req.body.username}`;
+      console.log("new user made");
+      return res.redirect("/login");
+    } else {
+      req.session.stat = "All fields are required.";
+      console.log("All fields are required.");
+      return res.redirect("/register");
     }
-    console.log("new user made");
-    res.redirect("/login");
   } catch (error) {
     console.log(error);
+    req.session.stat = "Registration failed.";
+    return res.redirect("/register");
   }
 });
 

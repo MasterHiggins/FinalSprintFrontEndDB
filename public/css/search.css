@@ -1,0 +1,241 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  font-family: "Inter", sans-serif;
+}
+
+.background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.background-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  z-index: -1;
+}
+
+.main-content {
+  position: relative;
+  z-index: 1;
+  width: 80%;
+  max-width: 1200px;
+  text-align: center;
+  min-height: 1001vh;
+}
+
+.welcome-message {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  position: sticky;
+  top: 100px; /* Adjust based on the height of the header */
+  z-index: 1001;
+}
+
+.welcome-message h2 {
+  margin: 0;
+  font-family: "Livvic", sans-serif;
+  font-weight: bold;
+  color: #11a4c4;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  position: sticky;
+  top: 140px; /* Adjust based on the combined height of header and welcome-message */
+  z-index: 10;
+}
+
+.search-bar {
+  padding: 10px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.search-dropdown {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.search-button {
+  padding: 10px 20px;
+  background-color: #7411f1;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #5900c4;
+}
+
+.search-results {
+  margin-top: 20px;
+}
+
+.results-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.result-card {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #095d70;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px;
+  width: calc(33% - 40px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.result-body {
+  margin-top: 10px;
+}
+
+.result-body p {
+  margin: 5px 0;
+}
+
+.sale-icon {
+  height: 20px;
+  vertical-align: middle;
+}
+
+/* Existing styles */
+.badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.badge.electronics {
+  background-color: #007bff;
+}
+
+.badge.clothing {
+  background-color: #28a745;
+}
+
+.badge.home {
+  background-color: #ffc107;
+}
+
+.badge.beauty {
+  background-color: #e83e8c;
+}
+
+.badge.books {
+  background-color: #795548; /* Brown */
+}
+
+.badge.sports-and-outdoors {
+  background-color: #17a2b8; /* Light Blue */
+}
+
+.badge.home-and-kitchen {
+  background-color: #ff9800; /* Orange */
+}
+
+.badge.beauty-and-personal-care {
+  background-color: #e83e8c;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Adjust sale icon size */
+.sale-icon {
+  height: 60px; /* Increase the size of the sale icon */
+  vertical-align: middle;
+}
+.results-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.result-card {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px;
+  width: calc(33% - 40px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+/* Responsive design for tablets */
+@media screen and (max-width: 768px) {
+  .result-card {
+    width: calc(50% - 40px);
+  }
+}
+
+/* Responsive design for mobile phones */
+@media screen and (max-width: 480px) {
+  .result-card {
+    width: calc(100% - 40px);
+  }
+
+  .search-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-bar,
+  .search-dropdown,
+  .search-button {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}
+
+/* Additional responsive adjustments */
+@media screen and (max-width: 600px) {
+  .main-content {
+    width: 95%;
+  }
+
+  .welcome-message {
+    padding: 15px;
+  }
+
+  .welcome-message h2 {
+    font-size: 1.5em;
+  }
+}
