@@ -32,7 +32,7 @@ body {
   width: 80%;
   max-width: 1200px;
   text-align: center;
-  min-height: 100vh;
+  min-height: 1001vh;
 }
 
 .welcome-message {
@@ -40,6 +40,9 @@ body {
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
+  position: sticky;
+  top: 100px; /* Adjust based on the height of the header */
+  z-index: 1001;
 }
 
 .welcome-message h2 {
@@ -54,6 +57,9 @@ body {
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
+  position: sticky;
+  top: 140px; /* Adjust based on the combined height of header and welcome-message */
+  z-index: 10;
 }
 
 .search-bar {
