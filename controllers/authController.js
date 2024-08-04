@@ -1,6 +1,7 @@
 const db = require("../services/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const myEmitter = require("../services/logEvents");
 
 // Register a new user
 const register = async (req, res) => {
@@ -19,8 +20,10 @@ const register = async (req, res) => {
     );
     req.session.token = token;
     req.session.user = user;
+    myEmitter.emit("log", "register", `User registered: ${username}`);
     res.redirect("/login");
   } catch (err) {
+    myEmitter.emit("error", "register", `Registration error: ${err.message}`);
     req.session.stat = err.message;
     res.redirect("/register");
   }
@@ -50,8 +53,10 @@ const login = async (req, res) => {
     );
     req.session.token = token;
     req.session.user = user;
+    myEmitter.emit("log", "login", `User logged in: ${user.username}`);
     res.redirect("/search");
   } catch (err) {
+    myEmitter.emit("error", "login", `Login error: ${err.message}`);
     req.session.stat = err.message;
     res.redirect("/login");
   }

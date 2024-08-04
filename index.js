@@ -6,13 +6,14 @@ const fs = require("fs");
 const EventEmitter = require("events");
 const passport = require("./services/passport");
 const db = require("./services/db");
+const myEmitter = require("./services/logEvents"); // Correct path for logEvents.js
 const app = express();
 const PORT = process.env.PORT || 3000;
 global.DEBUG = true;
 
 // Setup event emitter
 class MyEmitter extends EventEmitter {}
-const myEmitter = new MyEmitter();
+const emitter = new MyEmitter();
 
 // Setup view engine
 app.set("view engine", "ejs");
@@ -36,6 +37,16 @@ app.use(
 // Initialize Passport.js
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Log each request
+app.use((req, res, next) => {
+  emitter.emit(
+    "log",
+    "access",
+    `Requested URL: ${req.url}, Method: ${req.method}, IP: ${req.ip}`
+  );
+  next();
+});
 
 // Middleware to make user available in all views
 app.use((req, res, next) => {
@@ -67,21 +78,12 @@ const checkNotAuthenticated = (req, res, next) => {
   res.redirect("/login");
 };
 
-// Auth routes
-const authRouter = require("./routes/auth");
-app.use("/auth", authRouter);
-
-const registerRouter = require("./routes/register");
-app.use("/register", registerRouter);
-app.use((req, res, next) => {
-  if (req.path === "/register") {
-    console.log("Register route accessed");
-  }
-  next();
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error("Unhandled error:", err);
+  emitter.emit("error", "error", `Error: ${err.message}`);
+  res.status(500).send("Something went wrong!");
 });
-
-const protectedRouter = require("./routes/protected");
-app.use("/api", protectedRouter);
 
 // Create logs directory if it doesn't exist
 const logDir = "logs";
@@ -117,15 +119,34 @@ app.use((req, res, next) => {
 });
 
 // Event emitter logging
-myEmitter.on("log", (message) => {
-  logger.info(message);
+emitter.on("log", (event, message) => {
+  logger.info(`Event: ${event}, Message: ${message}`);
 });
 
 // Routes
 app.get("/", checkAuthenticated, (req, res) => {
-  myEmitter.emit("log", "Visited homepage");
+  emitter.emit(
+    "log",
+    "Visited homepage",
+    `User: ${req.user ? req.user.username : "Guest"}`
+  );
   res.render("index", { stat: req.session.stat });
 });
+
+const authRouter = require("./routes/auth");
+app.use("/auth", authRouter);
+
+const registerRouter = require("./routes/register");
+app.use("/register", registerRouter);
+app.use((req, res, next) => {
+  if (req.path === "/register") {
+    console.log("Register route accessed");
+  }
+  next();
+});
+
+const protectedRouter = require("./routes/protected");
+app.use("/api", protectedRouter);
 
 const loginRouter = require("./routes/login");
 app.use("/login", checkAuthenticated, loginRouter);
@@ -149,9 +170,12 @@ app.use((err, req, res, next) => {
   res.status(500).send("Something went wrong!");
 });
 
-// Start server
+// Start server (only once)
 app.listen(PORT, (err) => {
   if (err) console.log(err);
+  emitter.emit("log", "server", `Server is running on port ${PORT}`);
   logger.info(`Server is running on port ${PORT}`);
   console.log(`Server is running on port ${PORT}`);
 });
+
+module.exports = app;
