@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
       req.session.user = user;
       req.session.token = token;
       req.session.stat = `hello ${user.username}`;
-      res.redirect("/");
+      res.redirect("/search"); // Redirect to search page after successful login
       return;
     } else {
       req.session.stat = "wrong password";
@@ -40,7 +40,7 @@ router.post("/", async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.redirect("/");
+    res.redirect("/login");
     return;
   }
 });

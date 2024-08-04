@@ -1,0 +1,66 @@
+body {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px 60px;
+  background-color: #c5e8f0;
+  position: sticky; /* Make header sticky */
+  top: 0; /* Stick to the top */
+  z-index: 1000; /* Ensure it stays on top of other elements */
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo {
+  height: 100px;
+  margin-right: 10px;
+  margin-top: 6px;
+}
+
+.shop-tart-text {
+  font-family: "Livvic", sans-serif;
+  font-weight: bold;
+  font-size: 36px;
+  color: #11a4c4;
+}
+
+.header-button {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  color: #3cb3cd;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 15px 30px;
+  border-radius: 5px;
+  background-color: #3cb3cd;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.header-button:hover {
+  background-color: #34a1b1;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-button {
+    align-self: center;
+    margin-top: 10px;
+  }
+}

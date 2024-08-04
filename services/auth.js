@@ -50,7 +50,7 @@ const googleAuthHandler = (req, res) => {
     { expiresIn: "1h" }
   );
   req.session.token = token;
-  res.redirect("/");
+  res.redirect("/search"); // Redirect to search after successful login
 };
 
 module.exports = {

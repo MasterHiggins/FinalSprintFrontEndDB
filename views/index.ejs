@@ -2,12 +2,43 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>FSDB Final Sprint</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Jua&family=Livvic:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Home - ShopTart</title>
   </head>
   <body>
-    <h1>Welcome to FSDB final sprint</h1>
-    <% if (stat) { %>
-    <div><%= stat %></div>
-    <% } %> <%- include('./partials/nav.ejs') %>
+    <%- include('partials/header', { buttonLabel: 'Login' }) %>
+    <div class="background">
+      <img
+        src="/assets/rainbow.jpg"
+        alt="Rainbow Background"
+        class="background-image"
+      />
+      <div class="login-box">
+        <h1 class="login-title">USER LOGIN</h1>
+        <% if (stat) { %>
+        <p class="status-message"><%= stat %></p>
+        <% } %>
+        <form action="/login" method="POST">
+          <input type="text" name="username" placeholder="Username" required />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+          />
+          <button type="submit" class="login-button">Login</button>
+          <a href="/auth/google" class="google-signin">
+            <img src="/assets/google1.png" alt="Sign in with Google" />
+          </a>
+          <p>Don’t have an account? <a href="/register">Sign Up</a></p>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
